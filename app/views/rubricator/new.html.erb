@@ -1,0 +1,35 @@
+<h1>Добавление рубрик, подрубрик и компаний</h1>
+	<% if @utype == "admin" %>
+		<%= form_for :add_rubric, :url => { :action => :create_rubric } do |f| %>
+			<%= f.label :name, "Рубрику" %><br>
+			<%= f.text_field :name %>
+			<%= f.submit "Добавить рубрику" %>
+		<% end %>
+
+		<%= form_for :add_subrubric, :url => { :action => :create_subrubric } do |f| %>
+			<%= f.label :name, "Подрубрику" %><br>
+			<%= f.text_field :name %> в 
+			<%= f.select(:rubric_name, @rubrics.map {|e| e.name }) %>
+			<%= f.submit "Добавить подрубрику" %>
+		<% end %>
+	<% end %>
+
+	<% if @utype == "user" || @utype == "admin" %>
+		<%= form_for :add_company, :url => { :action => :create_company } do |f| %>
+			<%= f.label :name, "Компанию" %><br>
+			<%= f.text_field :name %><br>
+			<%= f.label :address, "Адрес-" %>
+			<%= f.text_field :address %><br>
+			<%= f.label :phone, "Тел.-" %>
+			<%= f.text_field :phone %><br>
+			<%= f.label :description, "Описание" %><br>
+			<%= f.text_area :description %><br>
+			 добавить в
+			<%= f.select(:subrubric_name, @srubrics.map {|e| e.name }) %>
+			<%= f.submit "Добавить компанию" %>
+		<% end %>
+	<% else %>
+		<strong>Вы не зашли</strong>
+	<% end %>
+
+	<%= link_to 'На главную', :action => :index %>

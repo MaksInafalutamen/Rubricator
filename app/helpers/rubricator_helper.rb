@@ -1,0 +1,2 @@
+module RubricatorHelper
+end

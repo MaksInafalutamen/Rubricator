@@ -1,0 +1,26 @@
+<h1>Регистрация</h1>
+<% if @user.errors.any? %>
+  <div id="ErrorMsg">
+    <h2>Обнаружены ошибки при регистрации:</h2>
+    <ul>
+    <% @user.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+ </div>
+<% end %>
+
+<%= form_for :reg_form,  :url => { :action => :create } do |f| %>
+		<p>
+		    <%= f.label :login, "Имя" %>
+		    <%= f.text_field :login %>
+  		</p>
+
+  		<p>
+		    <%= f.label :pass, "Пароль" %>
+		    <%= f.text_field :pass %>
+  		</p>
+  		<p>
+    		<%= f.submit "Создать" %>
+  		</p>
+  	<% end %>

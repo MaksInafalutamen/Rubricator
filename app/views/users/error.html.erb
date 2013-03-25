@@ -1,0 +1,6 @@
+<% if @pas %>
+	<h1>Ошибка пароля</h1>
+<% else %>
+	<h1>Ошибка имени</h1>
+<% end %>
+<%= link_to 'На главную', :controller => "users", :action => :signout %> 

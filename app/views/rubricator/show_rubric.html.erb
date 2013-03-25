@@ -1,0 +1,18 @@
+<% if !(@rubric.nil?) %>
+	<h1><%=@rubric.name%></h1>
+
+	<%@rubric.subrubrics.each do |sr|%>
+		<%= link_to sr.name, :action => :show_subrubric, :sr => sr.name %><br>
+	<% end %>
+
+	<p>
+		<% if @utype == "admin" %>
+			<%= link_to 'Удалить', {:action => :del_rubric, :r => @rubric.name}, :method => :delete %> 
+		<% end %>
+		<%= link_to 'На главную', :action => :index %>
+	</p>
+<% else %>
+	<script type="text/javascript">
+    	window.location.href="/404.html"  // put your correct path in a string here
+  	</script>
+<% end %>

@@ -1,0 +1,52 @@
+<h1>Главная страница</h1>
+
+<div class = 'User'>
+	<%= form_for :log_form, :url => { :controller => "users", :action => :signin } do |f| %>
+		<p>
+		    <%= f.label :login, "Имя" %>
+		    <%= f.text_field :login %>
+  		</p>
+
+  		<p>
+		    <%= f.label :pass, "Пароль" %>
+		    <%= f.text_field :pass %>
+  		</p>
+  		<p>
+    		<%= f.submit "Войти" %>
+  		</p>
+  	<% end %>
+  	<%= link_to 'Регистрация', :controller => "users", :action => :new %> 
+</div>
+<% if !@lastadd.nil? %>
+	<div class = 'Last'>
+		Последние добавления <br>
+		<% @lastadd.each do |c| %>
+				&nbsp;&nbsp;<%= link_to c.name, :action => :show_company ,:id => c.id %><br>
+		<% end %> 
+	</div>
+<% end %>
+
+	<div class = 'Rubrics'>
+		<%= form_for :search_form, :url => { :action => :search } do |f| %>
+			<%= f.text_field :req %>
+			<%= f.submit "Искать" %>
+		<% end %>
+
+		<% @rubrics.sort{|a,b| a.name <=> b.name}.each do |r| %>
+			<div class = 'r_<%= r.name%>'>
+				<strong><%= r.name%></strong>
+				<% if @utype == 'admin' %>
+					<%= link_to '-', :action => :show_rubric ,:r => r.name %>
+				<% end %>
+				<% r.subrubrics.sort{|a,b| a.name <=> b.name}.each do |sr| %>
+					<div class = 'sr_<%= sr.name%>'>
+						&nbsp;&nbsp;<%= link_to sr.name, :action => :show_subrubric ,:sr => sr.name %>(<%=sr.companys.length%>)
+					</div>
+				<%end%>
+			</div>
+		<% end %>
+		<br><%= link_to 'Добавить', :action => :new %>
+	</div>
+<%= link_to 'Помощь', "help.html" %>
+<%= link_to 'О нас', "about.html" %> 
+

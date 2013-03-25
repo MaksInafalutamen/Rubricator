@@ -1,0 +1,23 @@
+<% if !(@company.nil?) %>
+	 <h2><%= @company.name %></h2>
+
+	<p>
+	  <strong>Адрес: </strong><%= @company.address %><br>
+	  <strong>Телефон: </strong><%= @company.phone %><br>
+	</p>
+
+	<p>
+		<%= @company.description %>
+	</p>
+
+	<p>
+		<% if @utype == "admin" %>
+			<%= link_to 'Удалить', {:action => :del_company, :id => @company.id }, :method => :delete %> 
+		<% end %>
+		<%= link_to 'На главную', :action => :index%> 
+	</p>
+<% else %>
+	<script type="text/javascript">
+    	window.location.href="/404.html"  // put your correct path in a string here
+  	</script>
+<% end %>

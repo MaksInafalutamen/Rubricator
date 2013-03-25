@@ -1,0 +1,61 @@
+<h1>Результаты поиска по запросу "<%= @req %>"</h1>
+
+<% if !@rubr_res.empty? %>
+	<div class = 'rubrics'>
+		В рубриках(<%= @rubr_res.length %>):<br>
+		<% @rubr_res.each do |r| %>
+			&nbsp;&nbsp;<%= link_to r.name, :action => :show_rubric ,:r => r.name %>
+		<% end %> 
+	</div>
+<% end %>
+
+<% if !@subr_res.empty? %>
+	<div class = 'subrubrics'>
+		В подрубриках(<%= @subr_res.length %>):<br>
+		<% @subr_res.each do |sr| %>
+			&nbsp;&nbsp;<%= link_to sr.name, :action => :show_subrubric ,:sr => sr.name %>
+		<% end %> 
+	</div>
+<% end %>
+
+<% if !@company_name_res.empty? %>
+	<div class = 'company_name'>
+		В именах компаний(<%= @company_name_res.length %>):<br>
+		<% @company_name_res.each do |c| %>
+			&nbsp;&nbsp;<%= link_to c.name, :action => :show_company, :id => c.id %><br>
+		<% end %> 
+	</div>
+<% end %>
+
+<% if !@company_address_res.empty? %>
+	<div class = 'company_address'>
+		В адресах компаний(<%= @company_address_res.length %>):<br>
+		<% @company_address_res.each do |c| %>
+			&nbsp;&nbsp;<%= link_to c.name, :action => :show_company, :id => c.id %><br>
+		<% end %> 
+	</div>
+<% end %>
+
+<% if !@company_phone_res.empty? %>
+	<div class = 'company_phone'>
+		В телефонных номерах компаний(<%= @company_phone_res.length %>):<br>
+		<% @company_phone_res.each do |c| %>
+			&nbsp;&nbsp;<%= link_to c.name, :action => :show_company, :id => c.id %><br>
+		<% end %> 
+	</div>
+<% end %>
+
+<% if !@company_description_res.empty? %>
+	<div class = 'company_description'>
+		В описаниях компаний(<%= @company_description_res.length %>):<br>
+		<% @company_description_res.each do |c| %>
+			&nbsp;&nbsp;<%= link_to c.name, :action => :show_company, :id => c.id %><br>
+		<% end %> 
+	</div>
+<% end %>
+
+<%= form_for :search_form, :url => { :action => :search } do |f| %>
+	<%= f.text_field :req %>
+	<%= f.submit "Искать" %>
+<% end %>
+
